@@ -1,4 +1,6 @@
 package garbi.mementobackend.enums;
 
-public class UserRole {
+public enum UserRole {
+    FREE,
+    PREMIUM
 }
