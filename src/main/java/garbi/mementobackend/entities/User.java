@@ -1,7 +1,11 @@
 package garbi.mementobackend.entities;
 
+import garbi.mementobackend.enums.OauthProvider;
 import garbi.mementobackend.enums.UserRole;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,9 +30,13 @@ public class User implements UserDetails {
     private Long id;
 
     @Column(unique = true, nullable = false)
+    @Email
     private String email;
 
     @Column(nullable = false)
+    private String username;
+
+    @Column()
     private String password;
 
     @Enumerated(EnumType.STRING)
@@ -37,13 +45,11 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "oauth_provider", nullable = false)
-    private String oauthProvider; // "GOOGLE", "LOCAL", etc.
+    private OauthProvider oauthProvider; // "GOOGLE", "LOCAL", etc.
 
-    @Column(name = "oauth_id")
-    private String oauthId;
 
     @Column(name = "is_enabled")
-    private boolean isEnabled = true;
+    private boolean isEnabled;
 
     @Column(name = "premium_expiration")
     private LocalDateTime premiumExpiration;
